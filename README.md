@@ -40,8 +40,18 @@ git push -u origin main
 
 ## 🌍 Deploy for free
 
+### GitHub Pages — zero local setup ⭐
+
+1. Upload this repo to GitHub (web UI or `git push`).
+2. In the repo, go to **Settings → Pages → Source** and select **GitHub Actions**.
+3. Wait ~1–2 minutes: the workflow in `.github/workflows/deploy.yml`
+   builds the site and publishes it at `https://YOUR-USER.github.io/CV-Web/`.
+
+Every future `git push` (or web upload) redeploys automatically.
+
+### Alternatives
+
 - **Vercel / Netlify**: connect the repo and deploy (build: `npm run build`, output: `dist`).
-- **GitHub Pages**: serve the `dist` folder after `npm run build`.
 
 ## 🧾 CV as PDF
 
