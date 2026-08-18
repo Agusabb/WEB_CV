@@ -1,2 +1,53 @@
-# WEB_CV
-Web version of my CV
+# 📇 CV Web — Agustín Sabbione
+
+My CV as an interactive website: a professional dossier built with **React + Vite + Tailwind CSS v4**.
+
+> Data Analyst · Qlik Developer · PhD in Agricultural Sciences.
+> Experience, research & publications, IT skills, education and contact — with light/dark theme,
+> scroll animations and one-click PDF export via `Ctrl/Cmd + P`.
+
+## ✏️ Edit your data
+
+The whole site reads from **a single file**: [`src/data/cv.ts`](src/data/cv.ts).
+Change your name, experience, research, skills, courses and links there — nothing else needs to change.
+
+```
+src/
+├── data/cv.ts          ← 📌 YOUR CV: edit only this file
+├── components/         ← Sections (Hero, Experience, Research, Stack…)
+├── hooks.ts            ← Animations: scramble, reveal, scrollspy, theme
+├── App.tsx
+└── index.css           ← Palette, fonts and print styles
+```
+
+## 🚀 Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+## 📦 Push to GitHub
+
+```bash
+git init
+git add .
+git commit -m "feat: CV Web — interactive curriculum"
+git branch -M main
+git remote add origin https://github.com/YOUR-USER/CV-Web.git
+git push -u origin main
+```
+
+## 🌍 Deploy for free
+
+- **Vercel / Netlify**: connect the repo and deploy (build: `npm run build`, output: `dist`).
+- **GitHub Pages**: serve the `dist` folder after `npm run build`.
+
+## 🧾 CV as PDF
+
+The **"PDF CV"** button (or `Ctrl/Cmd + P`) uses dedicated print styles:
+the site becomes a clean black-on-white document, ready to send.
+
+---
+
+Built with React 18 · Vite 6 · Tailwind CSS 4 · Syne, Sora & JetBrains Mono.

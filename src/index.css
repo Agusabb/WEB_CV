@@ -1,0 +1,281 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ————— Paleta semántica (cambia con el tema) ————— */
+:root {
+  --bg: #eef2ee;
+  --surface: #f7faf7;
+  --card: #fbfdfb;
+  --ink: #101b16;
+  --muted: #52625a;
+  --line: rgba(16, 27, 22, 0.16);
+  --line-soft: rgba(16, 27, 22, 0.08);
+  --flame: #d94f27;
+  --flame-soft: rgba(217, 79, 39, 0.1);
+  --pine: #14614a;
+  --pine-soft: rgba(20, 97, 74, 0.1);
+  --amber: #dd9a26;
+  --amber-soft: rgba(221, 154, 38, 0.14);
+  --glow: rgba(20, 97, 74, 0.1);
+  --shadow: 0 18px 44px -18px rgba(16, 27, 22, 0.28);
+}
+
+.dark {
+  --bg: #0b120f;
+  --surface: #101a15;
+  --card: #142019;
+  --ink: #e8efe9;
+  --muted: #8fa398;
+  --line: rgba(232, 239, 233, 0.16);
+  --line-soft: rgba(232, 239, 233, 0.07);
+  --flame: #ff7a4d;
+  --flame-soft: rgba(255, 122, 77, 0.13);
+  --pine: #3fbf8f;
+  --pine-soft: rgba(63, 191, 143, 0.12);
+  --amber: #f0b454;
+  --amber-soft: rgba(240, 180, 84, 0.14);
+  --glow: rgba(63, 191, 143, 0.08);
+  --shadow: 0 22px 50px -20px rgba(0, 0, 0, 0.6);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-soft: var(--muted);
+  --color-line: var(--line);
+  --color-linesoft: var(--line-soft);
+  --color-flame: var(--flame);
+  --color-flamesoft: var(--flame-soft);
+  --color-pine: var(--pine);
+  --color-pinesoft: var(--pine-soft);
+  --color-amber: var(--amber);
+  --color-ambersoft: var(--amber-soft);
+  --font-display: "Syne", "Sora", sans-serif;
+  --font-body: "Sora", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: "Sora", "Segoe UI", sans-serif;
+  transition: background-color 0.45s ease, color 0.45s ease;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--flame);
+  color: #fdf6ee;
+}
+
+/* ————— Fondo ambiental: rejilla + resplandor ————— */
+.bg-grid-layer {
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 78%);
+}
+
+.bg-glow-layer {
+  background:
+    radial-gradient(600px 420px at 12% 8%, var(--glow), transparent 65%),
+    radial-gradient(700px 520px at 92% 30%, var(--flame-soft), transparent 65%),
+    radial-gradient(560px 460px at 60% 96%, var(--amber-soft), transparent 65%);
+}
+
+/* Grano / ruido */
+.noise-overlay {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 70;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 9s steps(6) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-4%, 3%); }
+  40% { transform: translate(3%, -4%); }
+  60% { transform: translate(-3%, -2%); }
+  80% { transform: translate(4%, 4%); }
+}
+
+/* ————— Texto contorneado gigante ————— */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--line);
+}
+
+/* ————— Marquesina ————— */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.marquee-mask:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ————— Sello giratorio ————— */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.spin-slow {
+  animation: spin-slow 22s linear infinite;
+}
+
+/* ————— Parpadeo de cursor ————— */
+@keyframes caret-blink {
+  0%, 45% { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
+.caret-blink {
+  animation: caret-blink 1s step-end infinite;
+}
+
+/* ————— Punto de disponibilidad ————— */
+@keyframes ping-soft {
+  0% { transform: scale(1); opacity: 0.8; }
+  80%, 100% { transform: scale(2.4); opacity: 0; }
+}
+.ping-soft {
+  animation: ping-soft 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ————— Revelado al hacer scroll ————— */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Barras de habilidades */
+.skill-fill {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
+}
+.is-visible .skill-fill {
+  transform: scaleX(1);
+}
+
+/* Línea de tiempo */
+@keyframes draw-line {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+.timeline-line {
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+.is-visible .timeline-line {
+  transform: scaleY(1);
+}
+
+/* Subrayado que se dibuja en enlaces de navegación */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 2px;
+  width: 100%;
+  background: var(--flame);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* ————— Impresión: el CV se vuelve documento limpio ————— */
+@page {
+  margin: 14mm;
+}
+@media print {
+  .noise-overlay,
+  .no-print,
+  .bg-grid-layer,
+  .bg-glow-layer {
+    display: none !important;
+  }
+  html, body {
+    background: #ffffff !important;
+    color: #101b16 !important;
+  }
+  .dark {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --card: #ffffff;
+    --ink: #101b16;
+    --muted: #52625a;
+    --line: rgba(16, 27, 22, 0.25);
+    --line-soft: rgba(16, 27, 22, 0.12);
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .skill-fill,
+  .timeline-line {
+    transform: none !important;
+  }
+  section {
+    break-inside: avoid-page;
+  }
+  a {
+    text-decoration: none !important;
+  }
+}
+
+/* ————— Movimiento reducido ————— */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .noise-overlay,
+  .marquee-track,
+  .spin-slow,
+  .caret-blink,
+  .ping-soft {
+    animation: none !important;
+  }
+  .reveal,
+  .skill-fill,
+  .timeline-line {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
