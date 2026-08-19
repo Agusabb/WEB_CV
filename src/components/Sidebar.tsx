@@ -24,43 +24,35 @@ export function Sidebar({
   return (
     <>
       {/* ——— Escritorio: raíl lateral fijo ——— */}
-      <aside className="no-print sticky top-0 hidden h-screen flex-col justify-between border-r border-line bg-surface/70 px-7 py-8 backdrop-blur-sm lg:flex">
+      <aside className="no-print sticky top-0 hidden h-dvh w-64 shrink-0 flex-col justify-between overflow-y-auto border-r border-line bg-surface/70 px-6 py-7 backdrop-blur-sm lg:flex">
         <div>
           {/* Identidad */}
           <a href="#portada" className="group flex items-center gap-3">
-            <span className="grid h-11 w-11 place-items-center rounded-lg border-2 border-flame bg-flamesoft font-display text-lg font-bold text-flame transition-transform duration-300 group-hover:-rotate-6">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg border-2 border-flame bg-flamesoft font-display text-lg font-bold text-flame transition-transform duration-300 group-hover:-rotate-6">
               {perfil.iniciales}
             </span>
-            <span>
+            <span className="min-w-0">
               <span className="block font-display text-lg font-bold leading-tight text-ink">Agustín S.</span>
-              <span className="block font-mono text-[10px] uppercase tracking-[0.22em] text-soft">
+              <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-soft">
                 {perfil.rol}
               </span>
             </span>
           </a>
 
-          {/* Retrato */}
-          <div className="group relative mt-8 overflow-hidden rounded-xl">
-            <div className="absolute -inset-1 rounded-xl border border-flame/50 opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true" />
-            <img
-              src={perfil.foto}
-              alt={perfil.fotoAlt}
-              className="w-full rounded-xl object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-              loading="eager"
-            />
-            <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 bg-gradient-to-t from-black/70 to-transparent px-4 pb-3 pt-8">
-              <span className="relative flex h-2 w-2">
-                <span className="ping-soft absolute inline-flex h-full w-full rounded-full bg-pine" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-pine" />
-              </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/90">
-                {perfil.disponibilidad}
-              </span>
+          {/* Estado compacto: el retrato se omite para priorizar contenido y navegación. */}
+          <div className="mt-7 flex items-start gap-3 rounded-xl border border-pine/30 bg-pinesoft px-4 py-3.5">
+            <span className="relative mt-1 flex h-2 w-2 shrink-0" aria-hidden="true">
+              <span className="ping-soft absolute inline-flex h-full w-full rounded-full bg-pine" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-pine" />
+            </span>
+            <div className="min-w-0">
+              <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-pine">Availability</p>
+              <p className="mt-1 text-xs font-medium leading-relaxed text-ink">{perfil.disponibilidad}</p>
             </div>
           </div>
 
           {/* Navegación con scrollspy */}
-          <nav className="mt-8" aria-label="CV sections">
+          <nav className="mt-7" aria-label="CV sections">
             <ul className="space-y-1">
               {NAV_ITEMS.map((item) => {
                 const activoItem = activo === item.id;
@@ -84,7 +76,7 @@ export function Sidebar({
           </nav>
         </div>
 
-        <div className="space-y-5">
+        <div className="mt-8 space-y-5">
           {/* Acciones */}
           <div className="flex gap-2">
             <button

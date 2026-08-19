@@ -9,8 +9,6 @@ export const perfil = {
   rolTyped: "Data Analyst · Qlik & Power BI",
   resumen:
     "Data Analyst with 8+ years turning complex data into clear decisions — from bioinformatics pipelines in a CONICET lab to enterprise BI platforms built on Qlik and Power BI. I design data models, build interactive dashboards and keep the whole platform governed, secure and humming. Currently based in Turin and open to relocation to Spain.",
-  foto: "https://image.qwenlm.ai/generated-images/21f1ba8a-af06-4ce3-a8ad-a98604ecb078/_result.png",
-  fotoAlt: "Editorial illustrated portrait of Agustín Sabbione",
   disponibilidad: "Open to relocation — Spain",
   email: "sabbioneagustin@gmail.com",
   telefono: "+39 351 494 0002",

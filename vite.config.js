@@ -7,6 +7,7 @@ export default defineConfig({
   base: '/CV-Web/',
   server: {
     host: "0.0.0.0",
+    allowedHosts: true,
     port: 3000,
     strictPort: true,
     hmr: {
