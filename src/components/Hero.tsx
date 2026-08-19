@@ -21,7 +21,8 @@ function Typewriter({ textos, velocidad = 46 }: { textos: string[]; velocidad?: 
     const t = window.setTimeout(() => {
       if (!borrando) {
         if (sub < actual.length) setSub(sub + 1);
-        else setBorrando(true);
+        // Con un único rol, el texto queda visible una vez escrito.
+        else if (textos.length > 1) setBorrando(true);
       } else {
         if (sub > 0) setSub(sub - 1);
         else {
@@ -33,10 +34,10 @@ function Typewriter({ textos, velocidad = 46 }: { textos: string[]; velocidad?: 
     return () => window.clearTimeout(t);
   }, [sub, borrando, idx, textos, velocidad, reduced]);
   return (
-    <span>
-      {textos[idx].slice(0, sub)}
-      <span className="cursor-blink text-pine" aria-hidden="true">
-        ▍
+    <span aria-label={textos.join(". ")}>
+      <span aria-hidden="true">
+        {textos[idx].slice(0, sub)}
+        <span className="caret-blink text-pine">▍</span>
       </span>
     </span>
   );
@@ -85,7 +86,7 @@ export function Hero() {
   };
 
   return (
-    <section id="portada" className="relative flex min-h-screen flex-col overflow-hidden px-6 pt-14 md:px-12 lg:px-16">
+    <section id="portada" className="relative flex min-h-dvh flex-col overflow-x-clip px-6 pt-14 md:px-12 lg:px-16">
       {/* Línea base del dossier */}
       <Reveal className="flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.28em] text-soft">
         <span className="inline-block h-px w-10 bg-flame" aria-hidden="true" />
@@ -111,10 +112,8 @@ export function Hero() {
           </p>
 
           <Reveal delay={250}>
-            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-soft md:text-base">
-              From bioinformatics pipelines in a CONICET lab to enterprise BI platforms on Qlik and
-              Power BI: I design data models, build interactive dashboards and turn complex data
-              into decisions teams can act on.
+            <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-soft md:text-base">
+              {perfil.resumen}
             </p>
           </Reveal>
 
